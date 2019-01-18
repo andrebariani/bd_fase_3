@@ -2,7 +2,7 @@ CREATE TABLE Cozinheiro(
 CPF 		    			varchar(11) PRIMARY KEY,
 nome_cozinheiro		   		varchar(100) NOT NULL,
 salario_cozinheiro			decimal NOT NULL,
-carga_horaria_cozinheiro	smallint NOT NULL CHECK(carga_horaria_cozinheiro >= 0, carga_horaria_cozinheiro <= 50),
+carga_horaria_cozinheiro	smallint NOT NULL CHECK(carga_horaria_cozinheiro >= 0 AND carga_horaria_cozinheiro <= 50),
 especializacao_cozinheiro 	varchar(15) NOT NULL CHECK(
 								especializacao_cozinheiro IN (
 									'Souschef',
@@ -17,7 +17,7 @@ especializacao_cozinheiro 	varchar(15) NOT NULL CHECK(
 CREATE TABLE Prato(
 cod_prato		    smallint PRIMARY KEY,
 CPF 		    	varchar(11),
-FOREIGN KEY(CPF) 	REFERENCES Cozinheiro(CPF) ON DELETE SET NULL
+FOREIGN KEY(CPF) 	REFERENCES Cozinheiro(CPF) ON DELETE SET NULL,
 preco_prato			Decimal NOT NULL CHECK(preco_prato > 0),
 nome_prato			varchar(50) NOT NULL,
 tipo_prato			varchar(50) NOT NULL CHECK(
@@ -34,7 +34,7 @@ CREATE TABLE Ingrediente(
 cod_ingrediente		    smallint PRIMARY KEY,
 nome_ingrediente		varchar(50) NOT NULL,
 tipo_ingrediente		varchar(30) NOT NULL NOT NULL CHECK(
-								tipo_prato IN (
+								tipo_ingrediente IN (
 									'Laticinios',
 									'Frutas',
 									'Legumes',
@@ -54,7 +54,7 @@ validade_ingrediente	smallint NOT NULL CHECK(validade_ingrediente > 0)
 CREATE TABLE Lote(
 cod_lote		    smallint PRIMARY KEY NOT NULL,
 cod_ingrediente		smallint,
-FOREIGN KEY(cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente) ON DELETE SET NULL
+FOREIGN KEY(cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente) ON DELETE SET NULL,
 data_vencimento		date NOT NULL,
 quantidade_lote		smallint NOT NULL CHECK(quantidade_lote > 0)
 );
@@ -70,26 +70,25 @@ nome_fornecedor		varchar(30) NOT NULL
 );
 
 CREATE TABLE Usa (
-cod_prato 			smallint NOT NULL,
-cod_ingrediente 	smallint NOT NULL,
+cod_prato 			smallint,
+cod_ingrediente 	smallint,
 PRIMARY KEY CLUSTERED (cod_prato, cod_ingrediente),
-FOREIGN KEY (cod_prato) REFERENCES Prato(cod_prato) ON DELETE SET NULL,
-FOREIGN KEY (cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente) ON DELETE SET NULL,
+FOREIGN KEY (cod_prato) REFERENCES Prato(cod_prato),
+FOREIGN KEY (cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente),
 quantidade_usada	smallint NOT NULL
 );
 
 CREATE TABLE Prove (
-cod_lote 			smallint NOT NULL,
-CNPJ			 	smallint NOT NULL,
+cod_lote 			smallint PRIMARY KEY,
+CNPJ			 	smallint PRIMARY KEY,
 PRIMARY KEY CLUSTERED (cod_lote, CNPJ),
-FOREIGN KEY (cod_lote) REFERENCES Lote(cod_lote) ON DELETE SET NULL,
-FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ) ON DELETE SET NULL,
+FOREIGN KEY (cod_lote) REFERENCES Lote(cod_lote),
+FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ),
 data_entrega		date NOT NULL
 );
 
 CREATE TABLE Telefone_Fornecedor (
-CNPJ 				smallint NOT NULL,
-PRIMARY KEY CLUSTERED (CNPJ),
+CNPJ 				smallint PRIMARY KEY,
 FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ) ON DELETE SET NULL,
 telefone_fornecedor	varchar(10)
 );
