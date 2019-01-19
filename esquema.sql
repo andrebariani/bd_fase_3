@@ -17,7 +17,6 @@ especializacao_cozinheiro 	varchar(15) NOT NULL CHECK(
 CREATE TABLE Prato(
 cod_prato		    smallint PRIMARY KEY,
 CPF 		    	varchar(11),
-FOREIGN KEY(CPF) 	REFERENCES Cozinheiro(CPF) ON DELETE SET NULL,
 preco_prato			Decimal NOT NULL CHECK(preco_prato > 0),
 nome_prato			varchar(50) NOT NULL,
 tipo_prato			varchar(50) NOT NULL CHECK(
@@ -27,7 +26,9 @@ tipo_prato			varchar(50) NOT NULL CHECK(
 									'Prato principal',
 									'Sobremesa'
 								)
-							)
+							),
+
+FOREIGN KEY(CPF) 	REFERENCES Cozinheiro(CPF) ON DELETE SET NULL
 );
 
 CREATE TABLE Ingrediente(
@@ -54,9 +55,10 @@ validade_ingrediente	smallint NOT NULL CHECK(validade_ingrediente > 0)
 CREATE TABLE Lote(
 cod_lote		    smallint PRIMARY KEY NOT NULL,
 cod_ingrediente		smallint,
-FOREIGN KEY(cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente) ON DELETE SET NULL,
 data_vencimento		date NOT NULL,
-quantidade_lote		smallint NOT NULL CHECK(quantidade_lote > 0)
+quantidade_lote		smallint NOT NULL CHECK(quantidade_lote > 0),
+
+FOREIGN KEY(cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente) ON DELETE SET NULL
 );
 
 CREATE TABLE Fornecedor(
@@ -70,21 +72,22 @@ nome_fornecedor		varchar(30) NOT NULL
 );
 
 CREATE TABLE Usa (
-cod_prato 			smallint,
+cod_prato 		smallint,
 cod_ingrediente 	smallint,
-PRIMARY KEY CLUSTERED (cod_prato, cod_ingrediente),
+quantidade_usada	smallint,
+
+PRIMARY KEY (cod_prato, cod_ingrediente),
 FOREIGN KEY (cod_prato) REFERENCES Prato(cod_prato),
-FOREIGN KEY (cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente),
-quantidade_usada	smallint NOT NULL
+FOREIGN KEY (cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente)
 );
 
 CREATE TABLE Prove (
-cod_lote 			smallint PRIMARY KEY,
-CNPJ			 	smallint PRIMARY KEY,
-PRIMARY KEY CLUSTERED (cod_lote, CNPJ),
+cod_lote 			smallint,
+CNPJ			 	smallint,
+data_entrega		date NOT NULL,
+PRIMARY KEY (cod_lote, CNPJ),
 FOREIGN KEY (cod_lote) REFERENCES Lote(cod_lote),
-FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ),
-data_entrega		date NOT NULL
+FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ)
 );
 
 CREATE TABLE Telefone_Fornecedor (
