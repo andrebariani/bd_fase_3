@@ -1,5 +1,5 @@
 CREATE TABLE Cozinheiro(
-CPF 		    			varchar(11) PRIMARY KEY,
+CPF 		    			varchar(14) PRIMARY KEY,
 nome_cozinheiro		   		varchar(100) NOT NULL,
 salario_cozinheiro			decimal NOT NULL,
 carga_horaria_cozinheiro	smallint NOT NULL CHECK(carga_horaria_cozinheiro >= 0 AND carga_horaria_cozinheiro <= 50),
@@ -16,7 +16,7 @@ especializacao_cozinheiro 	varchar(15) NOT NULL CHECK(
 
 CREATE TABLE Prato(
 cod_prato		    smallint PRIMARY KEY,
-CPF 		    	varchar(11),
+CPF 		    	varchar(14),
 preco_prato			Decimal NOT NULL CHECK(preco_prato > 0),
 nome_prato			varchar(50) NOT NULL,
 tipo_prato			varchar(50) NOT NULL CHECK(
@@ -36,20 +36,19 @@ cod_ingrediente		    smallint PRIMARY KEY,
 nome_ingrediente		varchar(50) NOT NULL,
 tipo_ingrediente		varchar(30) NOT NULL NOT NULL CHECK(
 								tipo_ingrediente IN (
-									'Laticinios',
+									'Laticínios',
 									'Frutas',
 									'Legumes',
 									'Verduras',
 									'Carnes',
 									'Ovos',
-									'Graos',
+									'Grãos',
 									'Cereais',
-									'Oleos',
+									'Óleos',
 									'Temperos'
 								)
 							),
-quantidade_total		smallint NOT NULL,
-validade_ingrediente	smallint NOT NULL CHECK(validade_ingrediente > 0)
+quantidade_total		smallint NOT NULL
 );
 
 CREATE TABLE Lote(
@@ -62,13 +61,13 @@ FOREIGN KEY(cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente) ON DELETE S
 );
 
 CREATE TABLE Fornecedor(
-CNPJ		    	varchar(14) PRIMARY KEY,
-email_fornecedor	varchar(30) NOT NULL,
+CNPJ		    	varchar(18) PRIMARY KEY,
+email_fornecedor	varchar(50) NOT NULL,
 rua					varchar(50) NOT NULL,
-bairro				varchar(30) NOT NULL,
-CEP					varchar(8) NOT NULL,
-numero				varchar(8) NOT NULL,
-nome_fornecedor		varchar(30) NOT NULL
+bairro				varchar(50) NOT NULL,
+CEP					varchar(9) NOT NULL,
+numero				smallint NOT NULL,
+nome_fornecedor		varchar(50) NOT NULL
 );
 
 CREATE TABLE Usa (
@@ -83,7 +82,7 @@ FOREIGN KEY (cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente)
 
 CREATE TABLE Prove (
 cod_lote 			smallint,
-CNPJ			 	varchar(14),
+CNPJ			 	varchar(18),
 data_entrega		varchar(10) NOT NULL,
 PRIMARY KEY (cod_lote, CNPJ),
 FOREIGN KEY (cod_lote) REFERENCES Lote(cod_lote),
@@ -91,9 +90,9 @@ FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ)
 );
 
 CREATE TABLE Telefone_Fornecedor (
-CNPJ 				varchar(14) PRIMARY KEY,
+CNPJ 				varchar(18) PRIMARY KEY,
 FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ) ON DELETE SET NULL,
-telefone_fornecedor	varchar(10)
+telefone_fornecedor	varchar(14)
 );
 
 DROP TABLE Telefone_Fornecedor;
@@ -104,3 +103,12 @@ DROP TABLE Lote;
 DROP TABLE Ingrediente;
 DROP TABLE Prato;
 DROP TABLE Cozinheiro;
+
+SELECT * FROM Telefone_Fornecedor;
+SELECT * FROM Prove;
+SELECT * FROM Usa;
+SELECT * FROM Fornecedor;
+SELECT * FROM Lote;
+SELECT * FROM Ingrediente;
+SELECT * FROM Prato;
+SELECT * FROM Cozinheiro;
