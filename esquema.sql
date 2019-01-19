@@ -55,14 +55,14 @@ validade_ingrediente	smallint NOT NULL CHECK(validade_ingrediente > 0)
 CREATE TABLE Lote(
 cod_lote		    smallint PRIMARY KEY NOT NULL,
 cod_ingrediente		smallint,
-data_vencimento		date NOT NULL,
+data_vencimento		varchar(10) NOT NULL,
 quantidade_lote		smallint NOT NULL CHECK(quantidade_lote > 0),
 
 FOREIGN KEY(cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente) ON DELETE SET NULL
 );
 
 CREATE TABLE Fornecedor(
-CNPJ		    	varchar(11) PRIMARY KEY,
+CNPJ		    	varchar(14) PRIMARY KEY,
 email_fornecedor	varchar(30) NOT NULL,
 rua					varchar(50) NOT NULL,
 bairro				varchar(30) NOT NULL,
@@ -74,7 +74,7 @@ nome_fornecedor		varchar(30) NOT NULL
 CREATE TABLE Usa (
 cod_prato 		smallint,
 cod_ingrediente 	smallint,
-quantidade_usada	smallint,
+quantidade_usada	text,
 
 PRIMARY KEY (cod_prato, cod_ingrediente),
 FOREIGN KEY (cod_prato) REFERENCES Prato(cod_prato),
@@ -83,15 +83,24 @@ FOREIGN KEY (cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente)
 
 CREATE TABLE Prove (
 cod_lote 			smallint,
-CNPJ			 	smallint,
-data_entrega		date NOT NULL,
+CNPJ			 	varchar(14),
+data_entrega		varchar(10) NOT NULL,
 PRIMARY KEY (cod_lote, CNPJ),
 FOREIGN KEY (cod_lote) REFERENCES Lote(cod_lote),
 FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ)
 );
 
 CREATE TABLE Telefone_Fornecedor (
-CNPJ 				smallint PRIMARY KEY,
+CNPJ 				varchar(14) PRIMARY KEY,
 FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ) ON DELETE SET NULL,
 telefone_fornecedor	varchar(10)
 );
+
+DROP TABLE Telefone_Fornecedor;
+DROP TABLE Prove;
+DROP TABLE Usa;
+DROP TABLE Fornecedor;
+DROP TABLE Lote;
+DROP TABLE Ingrediente;
+DROP TABLE Prato;
+DROP TABLE Cozinheiro;
