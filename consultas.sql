@@ -19,6 +19,8 @@ SELECT nome_fornecedor, Prove.cod_lote, nome_ingrediente, data_entrega FROM Forn
 --Versao só com nome e cod
 SELECT nome_fornecedor, Prove.cod_lote FROM Fornecedor, Prove, Lote WHERE Fornecedor.cnpj = Prove.cnpj AND Prove.cod_lote = Lote.cod_lote AND Fornecedor.cnpj = '83.358.102/0001-00';
 
+--Recuperar os números de telefone de um fornecedor
+select telefone_fornecedor from telefone,  fornecedor where telefone.cnpj = fornecedor.cnpj AND fornecedor.cnpj = '83.358.102/0001-00';
 
 CREATE OR REPLACE FUNCTION calcula_salario() RETURNS trigger AS $calcula_salario$
 	BEGIN
