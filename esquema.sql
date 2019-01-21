@@ -104,9 +104,9 @@ FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ) ON DELETE CASCADE
 CREATE TABLE Telefone_Fornecedor (
 cod_telefone 		smallint PRIMARY KEY,
 CNPJ			 	varchar(18),
-telefone_fornecedor	varchar(14)
+telefone_fornecedor	varchar(14),
 
-FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ) ON DELETE CASCADE,
+FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ) ON DELETE CASCADE
 );
 
 DROP TABLE Telefone_Fornecedor;
