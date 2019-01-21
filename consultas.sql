@@ -10,11 +10,26 @@ SELECT nome_cozinheiro, AVG(preco_prato) AS media_preco_prato FROM Prato, Cozinh
 --Recuperar os pratos feitos por cada cozinheiro
 SELECT nome_cozinheiro, nome_prato FROM Prato, Cozinheiro WHERE Prato.CPF = Cozinheiro.CPF;
 
---Recuperar receita de determinado prato
-SELECT nome_prato, nome_ingrediente, quantidade_usada FROM Prato, Ingrediente, Usa WHERE Prato.cod_prato = Usa.cod_prato AND Ingrediente.cod_ingrediente = Usa.cod_ingrediente AND nome_prato = 'Bolo de chocolate';
+--Recuperar receita (ingrediente e quantidade) de determinado prato
+SELECT nome_ingrediente, quantidade_usada FROM Ingrediente, Usa WHERE cod_prato = '8' AND Ingrediente.cod_ingrediente = Usa.cod_ingrediente;
 
 --recuperar quais lotes um fornecedor provê
 --Versao com nome do ingrediente e data de entrega
 SELECT nome_fornecedor, Prove.cod_lote, nome_ingrediente, data_entrega FROM Fornecedor, Prove, Lote, Ingrediente WHERE Fornecedor.cnpj = Prove.cnpj AND Prove.cod_lote = Lote.cod_lote AND Lote.cod_ingrediente = Ingrediente.cod_ingrediente AND Fornecedor.cnpj = '83.358.102/0001-00';
 --Versao só com nome e cod
 SELECT nome_fornecedor, Prove.cod_lote FROM Fornecedor, Prove, Lote WHERE Fornecedor.cnpj = Prove.cnpj AND Prove.cod_lote = Lote.cod_lote AND Fornecedor.cnpj = '83.358.102/0001-00';
+
+
+CREATE OR REPLACE FUNCTION calcula_salario() RETURNS trigger AS $calcula_salario$
+	BEGIN
+        IF NEW.salario_cozinheiro > NEW.carga_horaria_cozinheiro * 80 + 500 OR NEW.salario_cozinheiro < NEW.carga_horaria_cozinheiro * 80 - 500 THEN
+            UPDATE Cozinheiro SET NEW.salario_cozinheiro = ( NEW.carga_horaria_cozinheiro * 80 );
+        END IF;
+		RETURN NEW;
+	END;
+$calcula_salario$ LANGUAGE plpgsql;
+
+CREATE TRIGGER calcula_salario AFTER INSERT ON Cozinheiro
+	FOR EACH ROW EXECUTE PROCEDURE calcula_salario();
+
+DROP TRIGGER calcula_salario ON Cozinheiro;
