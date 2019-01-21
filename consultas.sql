@@ -14,10 +14,7 @@ SELECT nome_cozinheiro, nome_prato FROM Prato, Cozinheiro WHERE Prato.CPF = Cozi
 SELECT nome_ingrediente, quantidade_usada FROM Ingrediente, Usa WHERE cod_prato = '8' AND Ingrediente.cod_ingrediente = Usa.cod_ingrediente;
 
 --recuperar quais lotes um fornecedor provê
---Versao com nome do ingrediente e data de entrega
-SELECT nome_fornecedor, Prove.cod_lote, nome_ingrediente, data_entrega FROM Fornecedor, Prove, Lote, Ingrediente WHERE Fornecedor.cnpj = Prove.cnpj AND Prove.cod_lote = Lote.cod_lote AND Lote.cod_ingrediente = Ingrediente.cod_ingrediente AND Fornecedor.cnpj = '83.358.102/0001-00';
---Versao só com nome e cod
-SELECT nome_fornecedor, Prove.cod_lote FROM Fornecedor, Prove, Lote WHERE Fornecedor.cnpj = Prove.cnpj AND Prove.cod_lote = Lote.cod_lote AND Fornecedor.cnpj = '83.358.102/0001-00';
+SELECT nome_fornecedor, Prove.cod_lote FROM Fornecedor, Prove WHERE Fornecedor.cnpj = Prove.cnpj AND Fornecedor.cnpj = '17.274.942/0001-60';
 
 --Recuperar os números de telefone de um fornecedor
 select telefone_fornecedor from telefone,  fornecedor where telefone.cnpj = fornecedor.cnpj AND fornecedor.cnpj = '83.358.102/0001-00';
@@ -25,7 +22,7 @@ select telefone_fornecedor from telefone,  fornecedor where telefone.cnpj = forn
 CREATE OR REPLACE FUNCTION calcula_salario() RETURNS trigger AS $calcula_salario$
 	BEGIN
         IF NEW.salario_cozinheiro > (NEW.carga_horaria_cozinheiro * 40) + 500 OR NEW.salario_cozinheiro < NEW.carga_horaria_cozinheiro * 80 - 500 THEN
-            Cozinheiro.salario_cozinheiro := ( carga_horaria_cozinheiro * 80 );
+            UPDATE Cozinheiro SET salario_cozinheiro = ( carga_horaria_cozinheiro * 80 );
         END IF;
 		RETURN NEW;
 	END;
