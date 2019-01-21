@@ -2,7 +2,7 @@
 <MER>
 	<Informacoes>
 		<Posicao Left="39" Top="126"/>
-		<TotalItens Valor="136"/>
+		<TotalItens Valor="128"/>
 		<Tipo Valor="CONCEITUAL"/>
 		<Versao Valor="2.0.0"/>
 		<Autor Valor=""/>
@@ -663,8 +663,8 @@
       <Fonte default="-1"/>
       <Atributos>
         <Atributo nome="cod_ingrediente" id="47">
-          <Left Valor="608"/>
-          <Top Valor="416"/>
+          <Left Valor="603"/>
+          <Top Valor="421"/>
           <Width Valor="119"/>
           <Height Valor="16"/>
           <Fonte default="-1"/>
@@ -695,8 +695,8 @@
           </Ligacoes>
         </Atributo>
         <Atributo nome="nome_ingrediente" id="65">
-          <Left Valor="608"/>
-          <Top Valor="427"/>
+          <Left Valor="603"/>
+          <Top Valor="437"/>
           <Width Valor="131"/>
           <Height Valor="16"/>
           <Fonte default="-1"/>
@@ -727,8 +727,8 @@
           </Ligacoes>
         </Atributo>
         <Atributo nome="tipo_ingrediente" id="53">
-          <Left Valor="608"/>
-          <Top Valor="449"/>
+          <Left Valor="603"/>
+          <Top Valor="453"/>
           <Width Valor="121"/>
           <Height Valor="16"/>
           <Fonte default="-1"/>
@@ -752,70 +752,6 @@
           <Ligacoes>
             <Ligacao Destino_ID="6">
               <MostraCardinalidade Valor="0" Card_id="55"/>
-              <Cardinalidades Cardinalidade="4"/>
-              <Orientacao Valor="0"/>
-              <Fraca Valor="0"/>
-            </Ligacao>
-          </Ligacoes>
-        </Atributo>
-        <Atributo nome="quantidade_total" id="50">
-          <Left Valor="608"/>
-          <Top Valor="460"/>
-          <Width Valor="125"/>
-          <Height Valor="16"/>
-          <Fonte default="-1"/>
-          <Atributos/>
-          <AtributosOcultos/>
-          <Dicionario></Dicionario>
-          <Nula Valor="0"/>
-          <Observacao></Observacao>
-          <Futuro></Futuro>
-          <Anexos/>
-          <MaxCard Valor="1"/>
-          <MinCard Valor="1"/>
-          <Composto Valor="0"/>
-          <Identificador Valor="0"/>
-          <Tipo Valor="Texto(1)"/>
-          <Multivalorado Valor="0"/>
-          <Orientacao Valor="3"/>
-          <TamAuto Valor="-1"/>
-          <Desvio Valor="10"/>
-          <BarraID Valor="51"/>
-          <Ligacoes>
-            <Ligacao Destino_ID="6">
-              <MostraCardinalidade Valor="0" Card_id="52"/>
-              <Cardinalidades Cardinalidade="4"/>
-              <Orientacao Valor="0"/>
-              <Fraca Valor="0"/>
-            </Ligacao>
-          </Ligacoes>
-        </Atributo>
-        <Atributo nome="validade_ingrediente" id="167">
-          <Left Valor="608"/>
-          <Top Valor="438"/>
-          <Width Valor="147"/>
-          <Height Valor="16"/>
-          <Fonte default="-1"/>
-          <Atributos/>
-          <AtributosOcultos/>
-          <Dicionario></Dicionario>
-          <Nula Valor="0"/>
-          <Observacao></Observacao>
-          <Futuro></Futuro>
-          <Anexos/>
-          <MaxCard Valor="1"/>
-          <MinCard Valor="1"/>
-          <Composto Valor="0"/>
-          <Identificador Valor="0"/>
-          <Tipo Valor="Texto(1)"/>
-          <Multivalorado Valor="0"/>
-          <Orientacao Valor="3"/>
-          <TamAuto Valor="-1"/>
-          <Desvio Valor="10"/>
-          <BarraID Valor="168"/>
-          <Ligacoes>
-            <Ligacao Destino_ID="6">
-              <MostraCardinalidade Valor="0" Card_id="169"/>
               <Cardinalidades Cardinalidade="4"/>
               <Orientacao Valor="0"/>
               <Fraca Valor="0"/>

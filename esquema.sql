@@ -1,11 +1,11 @@
 -- Script de Criação do Banco de Dados para o projeto do restaurante Luigi's
--- Todas as denominação e estruturas das entidades refletem o modelo relacional proposto da Figura 3 no relatório.
+-- Todas as denominação e estruturas das entidades refletem o modelo relacional da Figura 3 no relatório.
 
 -- Criação da Tabela da entidade Cozinheiro
 CREATE TABLE Cozinheiro(
 CPF 		    			varchar(14) PRIMARY KEY,
 nome_cozinheiro		   		varchar(100) NOT NULL,
-salario_cozinheiro			decimal NOT NULL CHECK(salario_cozinheiro >= 0) DEFAULT 0,
+salario_cozinheiro			decimal NOT NULL CHECK(salario_cozinheiro > 0) DEFAULT 0,
 carga_horaria_cozinheiro	smallint NOT NULL CHECK(carga_horaria_cozinheiro >= 0 AND carga_horaria_cozinheiro <= 50) DEFAULT 0,
 especializacao_cozinheiro 	varchar(15) NOT NULL CHECK(
 								especializacao_cozinheiro IN (

@@ -1,7 +1,4 @@
---IMPORTANTE, FAZER OS INSERTS NA ORDEM MOSTRADA. Ou seja, primeiro cozinheiro, depois ingredientes, forncedores, pratos, etc. Thanks.
-
 --Insert dos cozinheiros
---Template do insert (por enquanto)
 --INSERT INTO Cozinheiro VALUES (*CPF*, *NOME_COZINEHIRO*, *CARGA_HORARIA*, *ESPECIALIZACAO*);
 
 INSERT INTO Cozinheiro VALUES ('165.186.270-26', 'Renato dos Santos',3000, 40, 'Entremetier');
@@ -12,7 +9,6 @@ INSERT INTO Cozinheiro VALUES ('589.348.390-15', 'Marli Luzia Drumond', 3500, 36
 
 
 --Insert dos igredientes
---Template do insert (por enquanto)
 --INSERT INTO Ingrediente VALUES (*CODIGO*, *NOME_INGREDIENTE*, *TIPO_INGREDIENTE*, VALIDADE_INGREDIENTE*);
 
 INSERT INTO Ingrediente VALUES (1, 'Leite', 'Laticínios', 7);
@@ -49,7 +45,6 @@ INSERT INTO Ingrediente VALUES (31, 'Vinho', 'Temperos', 160);
 
 
 --Insert dos fornecedores
---Template do insert (por enquanto)
 --INSERT INTO Fornecedor VELUES (*CNPJ*, *EMAIL_FORNECEDOR*, *RUA*, *BAIRRO*, *CEP*, *NUMERO*, *NOME_FORNECEDOR*);
 
 INSERT INTO Fornecedor VALUES ('83.358.102/0001-00', 'diretoria@mateusehenrycomerciodebebidasme.com.br', 'Rua João Rosa da Silva', 'Vera Tereza', '17253-442', 643, 'Mateus e Henry Comercio de Bebidas ME');
@@ -58,7 +53,6 @@ INSERT INTO Fornecedor VALUES ('37.166.179/0001-61', 'marketing@luciaeterezaadeg
 INSERT INTO Fornecedor VALUES ('33.961.520/0001-10', 'treinamento@raulemanuelalimentosme.com.br', 'Rua Santa Virgília', 'Vila Sagrado Coração de Maria', '64301-923', 464, 'Raul e Manuel Alimentos ME');
 
 --Insert dos pratos
---Template do insert (por enquanto)
 --INSERT INTO Prato VALUES (*CODIGO_PRATO*, *CPF*, *PRECO_PRATO*, *NOME_PRATO*, *TIPO_PRATO*);
 
 INSERT INTO Prato VALUES (1, '301.773.805-19', 60, 'Vichyssoise', 'Entrada');
@@ -78,8 +72,8 @@ INSERT INTO Prato VALUES (14, '411.690.657-32', 50, 'Risoto de limão siciliano'
 INSERT INTO Prato VALUES (15, '411.690.657-32', 60, 'Brusquetas', 'Acompanhamento');
 
 --Insert dos lotes
---Template do insert (por enquanto)
 --INSERT INTO Lote VALUES (*CODIGO_LOTE*, *CODIGO_INGREDIENTE*, *DATA_VENCIMENTO*, *QUANTIDADE_LOTE*);
+
 INSERT INTO Lote VALUES (1, 1, '15/05/2017', 5);
 INSERT INTO Lote VALUES (2, 1, '20/05/2017', 10);
 INSERT INTO Lote VALUES (3, 1, '23/05/2017', 12);
@@ -176,8 +170,8 @@ INSERT INTO Lote VALUES (93, 31, '30/11/2017', 7);
 
 
 --Insert do usa
---Template do insert (por enquanto)
 --INSERT INTO Usa VALUES (*CODIGO_PRATO*, *CODIGO_INGREDIENTE*, *QUANTIDADE_USADA*);
+
 INSERT INTO Usa VALUES (1, 11, '600g'); --'Vichyssoise'
 INSERT INTO Usa VALUES (1, 24, '1 unidade'); --'Vichyssoise'
 INSERT INTO Usa VALUES (1, 20, '100g'); --'Vichyssoise'
@@ -248,8 +242,8 @@ INSERT INTO Usa VALUES (15, 30, '100g'); -- 'Brusquetas', 'Acompanhamentos');
 INSERT INTO Usa VALUES (15, 6, '300g'); -- 'Brusquetas', 'Acompanhamentos');
 
 --Insert do provê
---Template do insert (por enquanto)
 --INSERT INTO Prove VALUES (*CODIGO_LOTE*, *CNPJ*, *DATA_ENTREGA*);
+
 INSERT INTO Prove VALUES (1, '83.358.102/0001-00', '08/05/2017');
 INSERT INTO Prove VALUES (2, '83.358.102/0001-00', '13/05/2017');
 INSERT INTO Prove VALUES (3, '83.358.102/0001-00', '16/05/2017');
@@ -346,7 +340,6 @@ INSERT INTO Prove VALUES (93, '33.961.520/0001-10', '25/04/2017');
 
 
 --Insert do telefone_fornecedor
---Template do insert (por enquanto)
 --INSERT INTO Telefone_fornecedor VALUES (*CNPJ*, *TELEFONE_FORNECEDOR*);
 
 INSERT INTO Telefone_fornecedor VALUES (1, '83.358.102/0001-00', '15-0771.8030');
