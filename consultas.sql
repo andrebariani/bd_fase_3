@@ -28,18 +28,3 @@ SELECT nome_fornecedor, Prove.cod_lote FROM Fornecedor, Prove WHERE Fornecedor.c
 -- Autor: Mariane
 -- Exemplo de <cnpj> = '83.358.102/0001-00'
 select telefone_fornecedor from telefone,  fornecedor where telefone.cnpj = fornecedor.cnpj AND fornecedor.cnpj = <cnpj>;
-
--- Implementação da Trigger
-CREATE OR REPLACE FUNCTION calcula_salario() RETURNS trigger AS $calcula_salario$
-	BEGIN
-        IF NEW.salario_cozinheiro > (NEW.carga_horaria_cozinheiro * 80) + 500 OR NEW.salario_cozinheiro < NEW.carga_horaria_cozinheiro * 80 - 500 THEN
-            UPDATE Cozinheiro SET salario_cozinheiro = ( carga_horaria_cozinheiro * 80 ) WHERE Cozinheiro.CPF = NEW.CPF;
-        END IF;
-		RETURN NEW;
-	END;
-$calcula_salario$ LANGUAGE plpgsql;
-
-CREATE TRIGGER calcula_salario AFTER INSERT ON Cozinheiro
-	FOR EACH ROW EXECUTE PROCEDURE calcula_salario();
-
-DROP TRIGGER calcula_salario ON Cozinheiro;

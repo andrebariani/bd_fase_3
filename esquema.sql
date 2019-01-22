@@ -5,8 +5,8 @@
 CREATE TABLE Cozinheiro(
 CPF 		    			varchar(14) PRIMARY KEY,
 nome_cozinheiro		   		varchar(100) NOT NULL,
-salario_cozinheiro			decimal NOT NULL CHECK(salario_cozinheiro > 0) DEFAULT 0,
-carga_horaria_cozinheiro	smallint NOT NULL CHECK(carga_horaria_cozinheiro >= 0 AND carga_horaria_cozinheiro <= 50) DEFAULT 0,
+salario_cozinheiro			decimal NOT NULL CHECK(salario_cozinheiro > 0),
+carga_horaria_cozinheiro	smallint NOT NULL CHECK(carga_horaria_cozinheiro >= 0 AND carga_horaria_cozinheiro <= 50),
 especializacao_cozinheiro 	varchar(15) NOT NULL CHECK(
 								especializacao_cozinheiro IN (
 									'Souschef',
@@ -40,7 +40,7 @@ FOREIGN KEY(CPF) 	REFERENCES Cozinheiro(CPF) ON DELETE CASCADE
 CREATE TABLE Ingrediente(
 cod_ingrediente		    smallint PRIMARY KEY,
 nome_ingrediente		varchar(50) NOT NULL,
-tipo_ingrediente		varchar(30) NOT NULL NOT NULL CHECK(
+tipo_ingrediente		varchar(30) NOT NULL CHECK(
 								tipo_ingrediente IN (
 									'Laticínios',
 									'Frutas',
@@ -64,7 +64,7 @@ cod_ingrediente		smallint,
 data_vencimento		varchar(10) NOT NULL,
 quantidade_lote		smallint NOT NULL CHECK(quantidade_lote > 0),
 
-FOREIGN KEY(cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente) ON DELETE CASCADE
+FOREIGN KEY(cod_ingrediente) REFERENCES Ingrediente(cod_ingrediente)
 );
 
 -- Criação da Tabela da Entidade Fornecedor
@@ -108,21 +108,3 @@ telefone_fornecedor	varchar(14),
 
 FOREIGN KEY (CNPJ) REFERENCES Fornecedor(CNPJ) ON DELETE CASCADE
 );
-
-DROP TABLE Telefone_Fornecedor;
-DROP TABLE Prove;
-DROP TABLE Usa;
-DROP TABLE Fornecedor;
-DROP TABLE Lote;
-DROP TABLE Ingrediente;
-DROP TABLE Prato;
-DROP TABLE Cozinheiro;
-
-SELECT * FROM Telefone_Fornecedor;
-SELECT * FROM Prove;
-SELECT * FROM Usa;
-SELECT * FROM Fornecedor;
-SELECT * FROM Lote;
-SELECT * FROM Ingrediente;
-SELECT * FROM Prato;
-SELECT * FROM Cozinheiro;
